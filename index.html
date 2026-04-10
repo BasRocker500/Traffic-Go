@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Traffic Go</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas" width="400" height="800"></canvas>
+
+        <!-- UI Layer (Overlays) -->
+        <div id="ui-layer">
+
+            <!-- HUD (Heads Up Display) -->
+            <div id="hud" class="hidden">
+                <div class="hud-item">Pit Stops: <span id="pitstops-count">0</span>/10</div>
+                <div class="hud-item distance">ระยะทาง: <span id="distance-indicator">0</span> m</div>
+                <div class="hud-item shield hidden" id="shield-status" style="color:#0f0; text-shadow:0 0 5px #0f0; border-color: rgba(0,255,0,0.5);">เกราะ: <span id="shield-time">0</span>s</div>
+                <div class="hud-item speed">ความเร็ว: <span id="speed-indicator">100</span> km/h</div>
+            </div>
+
+            <!-- Start Screen -->
+            <div id="start-screen" class="screen flex-center">
+                <div class="glass-panel">
+                    <h1 class="game-title">TRAFFIC <span>GO</span></h1>
+                    <p>ขับรถหลบสิ่งกีดขวางและตอบคำถามกฎจราจร!</p>
+                    <button class="btn primary-btn" id="start-btn" style="margin-bottom: 15px; width: 100%;">เริ่มเกม (START)</button>
+                    <button class="btn secondary-btn" id="howto-btn" style="width: 100%;">วิธีเล่น (HOW TO PLAY)</button>
+                </div>
+            </div>
+
+            <!-- How To Play Screen -->
+            <div id="howtoplay-screen" class="screen hidden flex-center">
+                <div class="glass-panel" style="text-align: left; padding: 30px;">
+                    <h2 class="game-title" style="font-size: 2rem; text-align: center;">วิธีเล่น</h2>
+                    <ul style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; margin-left: 20px; color: #fff;">
+                        <li>ใช้แป้นพิมพ์ <b>ลูกศรซ้าย-ขวา</b> หรือ <b>A-D</b> เพื่อบังคับรถ (หรือเอานิ้วลาก/ใช้เมาส์ลากก็ได้)</li>
+                        <li>ขับหลบรถสีแดง ถ้าชนจะ <span style="color:red">Game Over ทันที</span></li>
+                        <li>ขับไปให้ถึงป้อมตำรวจ (Pit Stop) จะต้องตอบคำถามกฎหมายจราจร</li>
+                        <li>ตอบผิด จะแพ้ทันที! ("เครื่องยนต์พัง")</li>
+                        <li>ตอบให้ถูกครบ <b>10 ครั้ง</b> เพื่อชนะเกม!</li>
+                        <li style="color:#0f0;"><b>ไอเทมเกราะรูปโล่ (S):</b> เก็บเพื่อเป็นอมตะ ชนรถได้โดยไม่ตายเป็นเวลา 10 วินาที</li>
+                    </ul>
+                    <button class="btn secondary-btn" id="close-howto-btn" style="width: 100%;">ปิด (CLOSE)</button>
+                </div>
+            </div>
+
+            <!-- Pit Stop Screen -->
+            <div id="pitstop-screen" class="screen hidden flex-center">
+                <div class="glass-panel pitstop-panel">
+                    <h2 class="alert-text">ด่านตรวจ (PIT STOP)</h2>
+                    <p id="question-text">Question goes here?</p>
+                    <div id="options-container" class="options-grid">
+                        <!-- Options will be injected here via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameover-screen" class="screen hidden flex-center">
+                <div class="glass-panel defeat-panel">
+                    <h2 class="gameover-title">GAME OVER</h2>
+                    <p id="gameover-reason">ชนสิ่งกีดขวาง!</p>
+                    <button class="btn secondary-btn" id="restart-btn">เล่นอีกครั้ง (RESTART)</button>
+                </div>
+            </div>
+
+            <!-- Victory Screen -->
+            <div id="victory-screen" class="screen hidden flex-center">
+                <div class="glass-panel victory-panel">
+                    <h2 class="victory-title">VICTORY!</h2>
+                    <p>คุณตอบคำถามถูกต้อง 10 ข้อและเข้าเส้นชัยแล้ว!</p>
+                    <button class="btn primary-btn" id="victory-restart-btn">เล่นอีกครั้ง (RESTART)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
